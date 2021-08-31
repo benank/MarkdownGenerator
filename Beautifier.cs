@@ -17,7 +17,7 @@ namespace MarkdownWikiGenerator
             if (!t.IsGenericType) return (isFull) ? t.FullName : t.Name;
 
             var innerFormat = string.Join(", ", t.GetGenericArguments().Select(x => BeautifyType(x)));
-            return Regex.Replace(isFull ? t.GetGenericTypeDefinition().FullName : t.GetGenericTypeDefinition().Name, @"`.+$", "") + "<" + innerFormat + ">";
+            return Regex.Replace(isFull ? t.GetGenericTypeDefinition().FullName : t.GetGenericTypeDefinition().Name, @"`.+$", "") + "&lt;" + innerFormat + "&gt;";
         }
 
         public static string ToMarkdownMethodInfo(MethodInfo methodInfo)

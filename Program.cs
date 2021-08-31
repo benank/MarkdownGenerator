@@ -52,15 +52,16 @@ namespace MarkdownWikiGenerator
                 {
                     homeBuilder.ListLink(MarkdownBuilder.MarkdownCodeQuote(item.BeautifyName), g.Key + "#" + item.BeautifyName.Replace("<", "").Replace(">", "").Replace(",", "").Replace(" ", "-").ToLower());
 
-                    sb.Append(item.ToString());
+                    Console.WriteLine("g.Key: " + item.Name);
+                    File.WriteAllText(Path.Combine(dest, item.Name + ".md"), item.ToString());
                 }
 
-                File.WriteAllText(Path.Combine(dest, g.Key + ".md"), sb.ToString());
+                // File.WriteAllText(Path.Combine(dest, g.Key + ".md"), sb.ToString());
                 homeBuilder.AppendLine();
             }
 
             // Gen Home
-            File.WriteAllText(Path.Combine(dest, "Home.md"), homeBuilder.ToString());
+            // File.WriteAllText(Path.Combine(dest, "Home.md"), homeBuilder.ToString());
         }
     }
 }

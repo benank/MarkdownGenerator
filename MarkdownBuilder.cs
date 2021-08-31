@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace MarkdownWikiGenerator
@@ -7,7 +8,19 @@ namespace MarkdownWikiGenerator
     {
         public static string MarkdownCodeQuote(string code)
         {
-            return "`" + code + "`";
+            if (File.Exists($"docs/{code}.md"))
+            {
+                return "[" + code + "]" + "(./" + code + ".md)";
+            }
+            else
+            {
+                return code;
+            }
+        }
+
+        public static string MarkdownLink(string code)
+        {
+            return $"[{code}]({code}.md)";
         }
 
 
@@ -80,7 +93,7 @@ namespace MarkdownWikiGenerator
         {
             sb.Append("```");
             sb.AppendLine(language);
-            sb.AppendLine(code);
+            sb.AppendLine(code.Replace("&lt;", "<").Replace("&gt;", ">"));
             sb.AppendLine("```");
         }
 
